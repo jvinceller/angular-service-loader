@@ -1,14 +1,6 @@
-<p>Time is running: {{ timeGoneBy.toFixed(1) }}s</p>
-
-<p *ngIf="outputWrapper.data$ | async; else loadingOrError">The third service delivers the following: {{ outputWrapper.data$ | async }}</p>
-<ng-template #loadingOrError>
-  <p *ngIf="outputWrapper.errorLoading$ | async; else loading">ERROR!</p>
-  <ng-template #loading>
-    <p>Loading...</p>
-  </ng-template>
-</ng-template>
-
+<app-showcase #showcase></app-showcase>
 <button (click)="stopAsyncCalls()">Stop async calls</button>
-<ol *ngIf="logs">
-  <li *ngFor="let log of logs">{{ log }}</li>
-</ol>
+<div>
+  <app-measurements></app-measurements>
+  <app-logging [source]="showcase.data$"></app-logging>
+</div>

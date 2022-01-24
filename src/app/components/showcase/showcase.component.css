@@ -1,0 +1,12 @@
+p {
+  padding: 10px;
+}
+.ok {
+  background-color: lightgreen;
+}
+.loading {
+  background-color: yellow;
+}
+.nok {
+  background-color: lightpink;
+}

@@ -1,0 +1,8 @@
+Logging observable's emitted values:
+<ol *ngIf="logs.length > 0; else nothingYet">
+  <li *ngFor="let log of logs">{{ log }}</li>
+</ol>
+
+<ng-template #nothingYet>
+  Nothing yet.
+</ng-template>

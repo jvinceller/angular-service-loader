@@ -1,0 +1,8 @@
+<p class="ok" *ngIf="data$ | async as data; else loadingOrError">The third service delivers the following: {{ data }}</p>
+
+<ng-template #loadingOrError>
+  <p class="nok" *ngIf="errorLoading$ | async as error; else loading">ERROR: {{ error }}</p>
+  <ng-template #loading>
+    <p class="loading">Loading data from backend... well, not really, but simulating it ;)</p>
+  </ng-template>
+</ng-template>
