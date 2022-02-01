@@ -1,5 +1,4 @@
 import {AppComponent} from './app.component';
-import {Observable} from "rxjs";
 
 /**
  * What we want to test is the following.
@@ -12,41 +11,22 @@ describe('AppComponent', () => {
   let component: AppComponent;
 
   beforeEach(async () => {
-    const s1mock = {
-      loadOne: () => new Observable(subscriber => {
-        subscriber.next(1);
-        subscriber.complete();
-      })
+    const timeMock = {
+      startMeasuringTimeGoneBy: jest.fn()
     };
 
-    const s2mock = {
-      loadTwo: () => new Observable(subscriber => {
-        subscriber.next(2);
-        subscriber.complete();
-      })
-    };
-
-    const s3mock = {
-      loadThree: () => new Observable(subscriber => {
-        subscriber.next(3);
-        subscriber.complete();
-      })
-    };
-
-    const ngZoneMock = {
-      runOutsideAngular: jest.fn()
-    };
-
-    const cdRefMock = {
-      detectChanges: jest.fn()
+    const loaderMock = {
+      stopLoading: jest.fn()
     };
 
     const provide = (mock: any): any => mock;
 
-    component = new AppComponent(provide(s1mock), provide(s2mock), provide(s3mock), provide(ngZoneMock), provide(cdRefMock));
+    component = new AppComponent(provide(timeMock), provide(loaderMock));
   });
 
-  it('should create the app', () => {
+  it('ngOnInit() runs flawlessly', () => {
+    component.ngOnInit();
+
     expect(component).toBeTruthy();
   });
 });

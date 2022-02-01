@@ -12,15 +12,17 @@ export class ShowcaseComponent implements OnInit {
   _dataSubject$ = new Subject<number>();
   data$ = this._dataSubject$.asObservable();
   errorLoading$ = new Subject<any>();
+  dataProcessor: (backendData: number) => number;
 
   constructor(private readonly loader: LoaderService) {
+    this.dataProcessor = this.processingData;
   }
 
   ngOnInit() {
     // starts loading data
     this.loader.loadBackendData().pipe(
       // process / convert data after arriving without an error
-      map(backendData => this.processingData(backendData)),
+      map(backendData => this.dataProcessor(backendData)),
       // catching error if any
       catchError((err: any) => {
         this.errorLoading$.next(err);
@@ -33,7 +35,7 @@ export class ShowcaseComponent implements OnInit {
   private processingData(backendData: number): number {
     return backendData * this.anotherImportantStep();
   }
-  
+
   private anotherImportantStep(): number {
     return 2;
   }

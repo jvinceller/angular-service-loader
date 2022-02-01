@@ -33,6 +33,8 @@ export class LoaderService {
             next: (result3) => {
               // emitting the combined result of all the loading
               subscriber.next(result3);
+              // if successful emit completion as mentioned in RxJS' contract
+              subscriber.complete();
             }, error: (errorS3) => {
               subscriber.error(errorS3);
             }

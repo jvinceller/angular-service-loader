@@ -1,25 +1,32 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ShowcaseComponent} from './showcase.component';
+import {Observable} from "rxjs";
 
-import { ShowcaseComponent } from './showcase.component';
-
+/**
+ * What we want to test is the following.
+ *
+ * 1) S3Service delivers a number defined in this test (z)
+ *    output$ should deliver the right number, which is (z).
+ * 2) If any service fails, output$ fails.
+ */
 describe('ShowcaseComponent', () => {
   let component: ShowcaseComponent;
-  let fixture: ComponentFixture<ShowcaseComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ ShowcaseComponent ]
-    })
-    .compileComponents();
+    const loaderMock = {
+      loadOne: () => new Observable(subscriber => {
+        subscriber.next(1);
+        subscriber.complete();
+      })
+    };
+
+    const provide = (mock: any): any => mock;
+
+    component = new ShowcaseComponent(provide(loaderMock));
   });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(ShowcaseComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
+  it('should create the app', () => {
     expect(component).toBeTruthy();
   });
+
+  // TODO test with mocked processing
 });
