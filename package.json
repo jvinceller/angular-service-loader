@@ -31,6 +31,7 @@
     "@babel/preset-typescript": "~7.16.7",
     "@types/jest": "~27.4.0",
     "@types/node": "^12.11.1",
+    "js-yaml": "~4.1.0",
     "babel-jest": "~27.4.6",
     "jest": "~27.4.7",
     "jest-preset-angular": "~11.1.0",
