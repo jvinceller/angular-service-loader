@@ -18,6 +18,8 @@ export class TimeService {
 
   stopMeasuringTimeGoneBy() {
     clearInterval(this.intervalHandle);
+    this._stoppedMeasuringControl$.next();
+    this._stoppedMeasuringControl$.complete();
   }
 
   startMeasuringTimeGoneBy() {
